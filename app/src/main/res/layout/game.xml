@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFA726"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="27dp"
+        android:layout_marginRight="27dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:id="@+id/player"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/WHITE"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginBottom="15dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="棋子数"
+                android:textColor="@color/BLACK"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/player_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:src="@color/darkyellow" />
+
+                <TextView
+                    android:id="@+id/chessnum"
+                    android:layout_width="32dp"
+                    android:layout_height="wrap_content"
+                    android:text=" × .."
+                    android:textColor="@color/BLACK"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="#FFA726">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/BLACK"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ai"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/WHITE"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/julishu"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="距离数"
+                android:textColor="@color/BLACK"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="60dp"
+                android:layout_height="15dp"
+                android:layout_weight="1"
+                android:gravity="center">
+
+             <!--   <ImageView
+                    android:id="@+id/aiImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:src="@drawable/white1" />-->
+
+                <TextView
+                    android:id="@+id/distantnum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text=" × .."
+                    android:textColor="@color/BLACK"
+                    android:textSize="30sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <cn.Jiangyiping.game.ChessView
+        android:id="@+id/chessView"
+        android:clickable="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="20dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="27dp"
+        android:layout_marginRight="27dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="bottom">
+
+        <Button
+            android:id="@+id/reback"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"
+            android:layout_weight="1"
+            android:background="#FF8800"
+            android:padding="10dp"
+            android:layout_marginBottom="20dp"
+            android:text="撤回操作"
+            android:textColor="@color/WHITE"
+            android:textSize="20sp" />
+
+
+        <Button
+            android:id="@+id/over"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#FF8800"
+            android:padding="10dp"
+            android:text="布署完毕"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/WHITE"
+            android:textSize="20sp" />
+<!--这里是布署完毕，我要求实现的效果是 部署完之后点击就有炸弹 然后弹窗胜利或者失败，接着按钮可以变成重新游戏-->
+    </LinearLayout>
+
+
+</LinearLayout>
