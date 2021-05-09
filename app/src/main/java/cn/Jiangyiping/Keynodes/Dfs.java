@@ -1,7 +1,7 @@
 package cn.Jiangyiping.Keynodes;
 //连通片的算法 还要调试 可以暂时先不管
-public class Dfs {
-  /* Graph G = new Graph();
+public class Dfs {/*
+    Graph
     private int Count=0; //记录连通的点数
     private int[]id; //每个节点所对应的联通分量标记
     private boolean[] Visited; //记录是否已访问
@@ -27,9 +27,9 @@ public class Dfs {
 			if(!Visited[i]){
 				dfs(i);
 			}
-		}*//*
+		}*/
     }
-    *//*public ccdfs(Graph graph){
+    /*public ccdfs(Graph graph){
         G = graph;
         Visited = new boolean[G.Vertex()];
         id = new int[G.Vertex()];
@@ -44,8 +44,7 @@ public class Dfs {
                 ccount++;
             }
         }
-        }*//*
     int Count(){
         return Count; //返回连通片大小
     }*/
-}
+

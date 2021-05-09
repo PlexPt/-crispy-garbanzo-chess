@@ -1,12 +1,6 @@
 package cn.Jiangyiping.game;
 
-import android.util.Log;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import cn.Jiangyiping.bean.Move;
-import cn.Jiangyiping.bean.Statistic;
 
 /**
  * 规则
@@ -34,7 +28,7 @@ public class Rule {
 	}
 	public static boolean isLegal(int row, int col) {     //在合法范围
 		//return row >= 0 && row <= 8 && col >= 0 && col <= 8; //0-8 = 9
-		return row >= 0 && row <= 9 && col >= 0 && col <= 9;
+		return row >= 0 && row <= 10 && col >= 0 && col <= 10;
 	}
 
 	/**

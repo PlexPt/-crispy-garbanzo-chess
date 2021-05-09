@@ -68,12 +68,12 @@ public class Dijskra {
         }
     }
     public float[] DijkstraAlogrim(){
-        for(int j=1;j<Vertexnum;j++){
+        for(int j=1;j<Vertexnum;j++){  //不同的点
             Arrays.fill(Path, j);
             Arrays.fill(Times,0);
             //j是定点 i表示其他点到定点j的最短路径
             for(int i=1;i<=Vertexnum;i++){
-                dis[i] = Matrix[j][i];
+                dis[i] = Matrix[j][i];  //j到其他点的
             }
             vis[j]=true;
             for(int x=1;x<Vertexnum;x++){
@@ -81,11 +81,11 @@ public class Dijskra {
                 for(int i=1;i<Vertexnum;i++)
                 {
                     if(!vis[i]&&dis[i]<min){
-                        min=dis[i];
+                        min=dis[i];  //找到最小值
                         temp=i;
                     }
                 }
-                vis[temp]=true;
+                vis[temp]=true;  //确定了一个点
                 for(int i=1;i<Vertexnum;i++){
                     if(Matrix[temp][i]+dis[temp]<dis[i]){
                         dis[i]=Matrix[temp][i]+dis[temp];//1到V个点  i到点j的最短距离

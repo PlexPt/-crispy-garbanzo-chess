@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFA726"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,7 +11,7 @@
         android:layout_marginLeft="27dp"
         android:layout_marginRight="27dp"
         android:layout_marginTop="20dp"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/player"
@@ -60,8 +60,8 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:gravity="center"
-            android:background="#FFA726">
+            android:background="#FFA726"
+            android:gravity="center">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -98,11 +98,11 @@
                 android:layout_weight="1"
                 android:gravity="center">
 
-             <!--   <ImageView
-                    android:id="@+id/aiImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:src="@drawable/white1" />-->
+                <!--   <ImageView
+                       android:id="@+id/aiImage"
+                       android:layout_width="wrap_content"
+                       android:layout_height="30dp"
+                       android:src="@drawable/white1" />-->
 
                 <TextView
                     android:id="@+id/distantnum"
@@ -117,31 +117,31 @@
 
     <cn.Jiangyiping.game.ChessView
         android:id="@+id/chessView"
-        android:clickable="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="60dp"
         android:layout_marginBottom="20dp"
-        />
+        android:layout_marginTop="60dp"
+        android:clickable="true" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginBottom="20dp"
         android:layout_marginLeft="27dp"
         android:layout_marginRight="27dp"
-        android:layout_marginBottom="20dp"
         android:gravity="bottom">
 
-        <Button
+        <TextView
             android:id="@+id/reback"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:layout_marginRight="30dp"
             android:layout_weight="1"
             android:background="#FF8800"
+            android:gravity="center"
             android:padding="10dp"
-            android:layout_marginBottom="20dp"
             android:text="撤回操作"
             android:textColor="@color/WHITE"
             android:textSize="20sp" />
@@ -151,14 +151,15 @@
             android:id="@+id/over"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:layout_weight="1"
             android:background="#FF8800"
+
             android:padding="10dp"
             android:text="布署完毕"
-            android:layout_marginBottom="20dp"
             android:textColor="@color/WHITE"
             android:textSize="20sp" />
-<!--这里是布署完毕，我要求实现的效果是 部署完之后点击就有炸弹 然后弹窗胜利或者失败，接着按钮可以变成重新游戏-->
+        <!--这里是布署完毕，我要求实现的效果是 部署完之后点击就有炸弹 然后弹窗胜利或者失败，接着按钮可以变成重新游戏-->
     </LinearLayout>
 
 

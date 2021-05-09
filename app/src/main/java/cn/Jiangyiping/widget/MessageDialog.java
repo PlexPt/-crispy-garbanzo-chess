@@ -1,4 +1,4 @@
-package cn.Jiangyiping.widget;
+ package cn.Jiangyiping.widget;
 
 import android.app.Dialog;
 import android.content.Context;
