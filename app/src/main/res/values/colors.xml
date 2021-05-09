@@ -6,7 +6,7 @@
     <color name="buttonNormalBlue">#59c6ff</color>
     <color name="buttonFocusedBlue">#89d7ff</color>
     <color name="lightyellow">#ffa726</color>
-<color name="darkyellow">#ff8800</color>
+    <color name="darkyellow">#ff8800</color>
     <color name="buttonNormalRed">#db414a</color>
     <color name="buttonFocusedRed">#cd0b17</color>
 

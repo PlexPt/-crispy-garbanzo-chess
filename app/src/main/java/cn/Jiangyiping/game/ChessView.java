@@ -15,9 +15,7 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
-import android.view.View;
 import android.view.WindowManager;
-
 import cn.Jiangyiping.reversi.R;
 
 /**
@@ -26,11 +24,17 @@ import cn.Jiangyiping.reversi.R;
 public class ChessView extends SurfaceView implements Callback {
 
     private RenderThread thread;
+
     private float X;
+
     private float Y;
+
     private int Row = 0;
+
     private int Col = 0;
+
     Path linePath;
+
     /**
      * 屏幕宽度
      */
@@ -40,7 +44,9 @@ public class ChessView extends SurfaceView implements Callback {
      * 本View背景宽高
      */
     private float bgLength;
+
     private float blackwidth;
+
     /**
      * 本View棋盘宽高
      */
@@ -48,35 +54,59 @@ public class ChessView extends SurfaceView implements Callback {
 
 
     private static final int M = 9; //9个格子
+
     private static final int Line = 10; //10根线
+
     /**
      * 棋格边长
      */
     private float a;
+
     private float b;
+
     private Rect rect;
+
     private boolean act = false;
+
     private float width;
+
     private float chessBoardLeft;
+
     private float chessBoardRight;
+
     private float chessBoardTop;
+
     private float chessBoardBottom;
-    private int StartX = 0, StartY = 0, EndX = 0, EndY = 0;
+
+//    private int StartX = 0, StartY = 0, EndX = 0, EndY = 0;
+
     private int Startx[];
+
     private int Starty[];
+
     private int Endx[];
+
     private boolean flag[];
+
     private boolean sign;
+
     private int Endy[];
+
     private static int times = 46;
+
     Bitmap chess;
+
     private static final byte NULL = Constant.NULL;
+
     private static final byte BLACK = Constant.BLACK;
     //private static final byte WHITE = Constant.WHITE;//constant 里面定义了NULL BLACK WHITE的值
 
     private float margin; //与边缘的距离
+
     private int time = 0;
+
     private byte[][] chessBoard;
+
     private int[][] index;
 
     private Bitmap[] images; //棋子转换bitmap
@@ -121,6 +151,13 @@ public class ChessView extends SurfaceView implements Callback {
         this(context, null, 0);
     }
 
+    public void reinit() {    //初始化棋盘
+
+        initialChessBoard();
+        initiallinepoint();
+        //	update(Row, Col);
+        time = 0;
+    }
     public void initialChessBoard() {    //初始化棋盘
         chessBoard = new byte[Line][Line];
         index = new int[Line][Line];
@@ -156,20 +193,14 @@ public class ChessView extends SurfaceView implements Callback {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 
-        widthMeasureSpec = View.MeasureSpec.makeMeasureSpec((int) bgLength, View.MeasureSpec.EXACTLY);
-        heightMeasureSpec = View.MeasureSpec.makeMeasureSpec((int) bgLength, View.MeasureSpec.EXACTLY);
+        widthMeasureSpec = MeasureSpec.makeMeasureSpec((int) bgLength, MeasureSpec.EXACTLY);
+        heightMeasureSpec = MeasureSpec.makeMeasureSpec((int) bgLength, MeasureSpec.EXACTLY);
         setMeasuredDimension(widthMeasureSpec, heightMeasureSpec);
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }  //重新测量宽高，确保宽高一样
 
     public void update(int Row, int Col) {  //更新棋盘数组
         chessBoard[Row][Col] = BLACK;
-        act = true;
-
-    }
-
-    public void undoPoint(int Row, int Col) {  //更新棋盘数组
-        chessBoard[Row][Col] = NULL;
         act = true;
 
     }
@@ -199,7 +230,7 @@ public class ChessView extends SurfaceView implements Callback {
         this.Y = Y;
     }
 
-    public void getStart(int row, int col, int count) {
+    public void setStart(int row, int col, int count) {
         this.Startx[count] = col;
         this.Starty[count] = row;
         Log.d("getstart", row + "行");
@@ -207,10 +238,20 @@ public class ChessView extends SurfaceView implements Callback {
         Log.d("getStart", count + "count");
     }
 
-    public void getEnd(int row, int col, int count) {
+    public void unsetStart(int count) {
+        this.Startx[count] = -1;
+        this.Starty[count] = -1;
+    }
+
+    public void setEnd(int row, int col, int count) {
         this.Endy[count] = col;
         this.Endy[count] = row;
         Log.d("getEnd", row + "行");
+    }
+
+    public void unsetEnd(int count) {
+        this.Endy[count] = -1;
+        this.Endy[count] = -1;
     }
 
     public void updateline(int Startx, int Starty, int Endx, int Endy, int count) {  //更新棋盘数组
@@ -219,9 +260,22 @@ public class ChessView extends SurfaceView implements Callback {
         this.Endx[count] = Endx;
         this.Endy[count] = Endy;
         act = true;
+    }
+
+    public void undoline(int count) {  //更新棋盘数组
+        this.Startx[count] = -1;
+        this.Starty[count] = -1;
+        this.Endx[count] = -1;
+        this.Endy[count] = -1;
+        act = true;
+    }
+
+    public void undoPoint(int Row, int Col) {  //更新棋盘数组
+        chessBoard[Row][Col] = NULL;
+        act = true;
 
     }
-/*	public void getMessage(int down){
+    /*	public void getMessage(int down){
 		int x;
 		x=down;
 		Log.d("getmessagedown", down+"值");
@@ -239,6 +293,9 @@ public class ChessView extends SurfaceView implements Callback {
 	}*/
 
     public void render(Canvas canvas) {
+
+        Log.d("TAG", "开始渲染 render");
+        canvas.drawColor(Color.parseColor("#233333"));
         /**
          * 画棋盘边框
          */
@@ -246,12 +303,14 @@ public class ChessView extends SurfaceView implements Callback {
         paint2.setColor(Color.YELLOW);
         paint2.setStrokeWidth(6);
         for (int i = 0; i < 10; i++) {  //10行9格 画在线上
-            canvas.drawLine(chessBoardLeft, chessBoardTop + i * width, chessBoardRight, chessBoardTop + i * width, paint2);
-            canvas.drawLine(chessBoardLeft + i * width, chessBoardTop, chessBoardLeft + i * width, chessBoardBottom, paint2);
+            canvas.drawLine(chessBoardLeft, chessBoardTop + i * width, chessBoardRight, chessBoardTop + i * width,
+                    paint2);
+            canvas.drawLine(chessBoardLeft + i * width, chessBoardTop, chessBoardLeft + i * width, chessBoardBottom,
+                    paint2);
             canvas.save();
 
         }
-        Log.d("TAG", "画棋格");
+        Log.d("TAG", "画棋格完毕");
         /**
          * 画棋子
          */
@@ -261,34 +320,38 @@ public class ChessView extends SurfaceView implements Callback {
         paint3.setDither(true);
         for (int col = 0; col < Line; col++) {
             for (int row = 0; row < Line; row++) {
-                if (chessBoard[row][col] == BLACK && true) {  //怎么画在线上是问题
+                if (chessBoard[row][col] == BLACK) {  //怎么画在线上是问题
                     Log.v("dian", "00");
-                    canvas.drawBitmap(chess, chessBoardLeft + col * width - a / 2, chessBoardTop + row * width - a / 2, paint3);
+                    canvas.drawBitmap(chess, chessBoardLeft + col * width - a / 2,
+                            chessBoardTop + row * width - a / 2, paint3);
                     canvas.save();
 
                 }
             }
         }
-        Log.d("TAG", "画棋子");
-//                       画连线
+        Log.d("TAG", "画棋子完毕");
+
+        Log.d("TAG", "画连线开始");
+        //            画连线   
         Paint paint1 = new Paint();
         paint1.setColor(Color.RED);
         paint1.setStrokeWidth(6);
         paint1.setAntiAlias(true);   // 不断刷新已经连线的点 保持连线一直在最上方
         paint1.setDither(true);
-        for (int f = 0; f < times; f++) {
-            if (Endx[f] != -1 && Endy[f] != -1 && Startx[f] != -1 && Starty[f] != -1) {
-                Log.d("hang", Starty[f] + "行");
-                canvas.drawLine(chessBoardLeft + Startx[f] * width, chessBoardTop + Starty[f] * width, chessBoardLeft + Endx[f] * width, chessBoardTop + Endy[f] * width, paint1);
+        for (int i = 0; i < times; i++) {
+            if (Endx[i] != -1 && Endy[i] != -1 && Startx[i] != -1 && Starty[i] != -1) {
+                Log.d("hang", Starty[i] + "行");
+                canvas.drawLine(chessBoardLeft + Startx[i] * width, chessBoardTop + Starty[i] * width,
+                        chessBoardLeft + Endx[i] * width, chessBoardTop + Endy[i] * width, paint1);
                 canvas.save(); //画连线
             }
         }
         Log.d("SIGN", sign + "值");
 
-        StartX = 0;
-        StartY = 0;
-        EndY = 0;
-        EndX = 0;
+//        StartX = 0;
+//        StartY = 0;
+//        EndY = 0;
+//        EndX = 0;
     }
 //有效点击才能连线！！！ 反复重画之前的连线 存起来反复画 但是怎么存次序呢
 	/*public int defaultIndex(int color) {
