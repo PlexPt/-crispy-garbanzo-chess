@@ -24,6 +24,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.Stack;
+
 import cn.Jiangyiping.bean.Move;
 import cn.Jiangyiping.game.ChessView;
 import cn.Jiangyiping.game.Constant;
@@ -32,7 +34,6 @@ import cn.Jiangyiping.reversi.R;
 import cn.Jiangyiping.widget.MessageDialog;
 import cn.Jiangyiping.widget.NewGameDialog;
 
-//import cn.Jiangyiping.game.Algorithm;
 
 public class GameActivity extends Activity {
 
@@ -64,6 +65,10 @@ public class GameActivity extends Activity {
     private int sign = 0;   //同上判断
     private static final String MULTIPLY = " × ";
 
+    /**
+     * 晦棋用的
+     */
+    Stack<Move> history = new Stack<>();
     private NewGameDialog dialog;
     private MessageDialog msgDialog;
 
@@ -85,6 +90,17 @@ public class GameActivity extends Activity {
         nameOfAI.setText("距离数");
 
         initialChessboard();
+        newGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    undo();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
         //每一盘新的游戏就有新的数 数
         //    G.graph(); //初始化图
         //chessnum.setText(Count);
@@ -130,6 +146,8 @@ public class GameActivity extends Activity {
                                 }
                                 chessView.update(row, col);  //完整下棋子后 更新棋盘值
                                 chessBoard[row][col] = BLACK;
+                                history.push(new Move(row, col));
+
                                 Log.d(String.valueOf(chessBoard), chessBoard[row][col] + "upchessboard");
                                 //      G.setVertex(Count); //标记点1-10
                                 //    G.Point[row][col]=Count; //标记Point
@@ -266,4 +284,16 @@ public class GameActivity extends Activity {
 
     //    }
     // }
+
+
+    public synchronized void undo() {// 悔棋
+        if (!history.isEmpty()) {
+            Move p1 = history.pop();
+
+            int col = p1.col;
+            int row = p1.row;
+            chessBoard[row][col] = NULL;
+            chessView.undoPoint(row, col);  //完整下棋子后 更新棋盘值
+        }
+    }
 }

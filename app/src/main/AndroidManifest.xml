@@ -4,9 +4,7 @@
     android:versionCode="1"
     android:versionName="1.0.0">
 
-    <uses-sdk
-        android:minSdkVersion="17"
-        android:targetSdkVersion="30" />
+    <uses-sdk android:targetSdkVersion="30" />
 
     <application
         android:allowBackup="true"
